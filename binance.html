@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Messages | Firebase</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+    <label>Name</label> <input id="Namebox" type="text"> <br>  <br>
+
+    <label>RollNo</label> <input id="Rollbox" type="text"> <br> <br>
+
+    <label>Section</label> <input id="Secbox" type="text"> <br> <br>
+    <label>Gender</label> <select id="Genbox">
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+    </select>
+<hr> <button id="Insbtn">INSERT</button>
+     <button id="Selbtn">SELECT</button>
+     <button id="Updbtn">UPDATE</button>
+     <button id="Delbtn">DELETE</button>
+
+
+     <p id="demo19"></p>
+     <p id="demo20"></p>
+     <table class="table is-striped is-narrow is-hoverable is-fullwidth">
+        <thead>
+        <tr>
+            <th>Kesisimmacd</th>
+            <th>kesisimmov</th>
+            <th>symbol</th>
+            <th>timeframe</th>
+        </tr>
+        </thead>
+        <tbody id="myTable">
+        </tbody>
+    </table>
+
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyBGLeNhHS0gs6DmSmSiLGedp0sc2dDotbs",
+    authDomain: "emaclass.firebaseapp.com",
+    databaseURL: "https://emaclass-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "emaclass",
+    storageBucket: "emaclass.appspot.com",
+    messagingSenderId: "573877337188",
+    appId: "1:573877337188:web:735989a1b2ae84a8d9f371"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  import {
+getFirestore, doc, getDoc, setDoc, collection, addDoc, updateDoc, deleteDoc, deleteField, getDocs
+}
+from "https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore.js";
+const db = getFirestore();
+
+let NameBox =   document.getElementById("Namebox");
+let RollBox =   document.getElementById("Rollbox");
+let SecBox =    document.getElementById("Secbox");
+let GenBox =    document.getElementById("Genbox");
+let	insBtn	=	document.getElementById("Insbtn");
+let	selBtn	=	document.getElementById("Selbtn");
+let	updBtn	=	document.getElementById("Updbtn");
+
+async function AddDocument_AutoID(){
+    var ref = collection(db,"TheStudentsList");
+        const docRef = await addDoc( ref, {
+            NameOfStd: NameBox.value,
+            RollNo: RollBox.value,
+            Section: SecBox.value,
+            Gender: GenBox.value
+        }
+        )
+.then(()=>{
+alert("data added successfully");
+})
+.catch((error)=>{
+alert("Unsuccessuful operationn, error:"+ error);
+});
+}
+insBtn.addEventListener("click",AddDocument_AutoID);
+
+var ref = doc(db,"data1","balance");
+const docSnap = await getDoc(ref);
+document.getElementById("demo19").innerHTML = docSnap.data().balance;// bu tek bir data cekerken gerekiyor
+
+var ref1 = collection(db,"data");
+const querySnapshot = await getDocs(ref1);
+querySnapshot.forEach((doc1) => {
+
+ let data = doc1.data();
+            let row  = `<tr>
+                            <td>${data.kesisimmacd}</td>
+                            <td>${data.kesisimmov}</td>
+                            <td>${data.symbol}</td>
+                            <td>${data.timeframe}</td>
+                      </tr>`;
+            let table = document.getElementById('myTable')
+            table.innerHTML += row
+
+
+
+});
+
+
+
+
+</script>
+
+
+</body>
+
+</html>

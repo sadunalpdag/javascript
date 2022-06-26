@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript in Body</h2>
+
+
+
+
+
+
+<h2>Demo JavaScript in Head</h2>
+<p id="demo">A Paragraph1</p>
+<p id="demo12"></p>
+<p id="demo22"></p>
+<p id="demo23"></p>
+<p id="demo24"></p>
+<p id="demo25"></p>
+<p id="demo26"></p>
+<p id="demo27"></p>
+<p id="demo28"></p>
+<button id="btn">Click Me!</button>
+<p id="demo29"></p>
+<p id="demo30"></p>
+<p id="demo31"></p>
+<p id="demo64"></p>
+
+
+
+
+
+<p>Input your age and click the button:</p>
+
+<input id="age" value="" />
+
+<button onclick="myFunction60()">Kontrol</button>
+
+<p id="demo63"></p>
+
+<button type="button" onclick="random2()">Random</button>
+
+
+
+<button onclick="sortalp()">Sort Alphabetically</button>
+<button onclick="sortnumeri()">Sort Numerically</button>
+
+
+
+
+
+
+<button type="button" onclick="myFunction2()">Try it1</button>
+<button type="button" onclick="myFunction1()">Try it2</button>
+<button type="button" onclick="myFunction3()">Try it3</button>
+<button type="button" onclick="increment2()">inc</button>
+<button type="button" onclick="increment2()">inc</button>
+<script>
+
+    let text = '{"employees":[' +
+'{"firstName":"John","lastName":"Doe" },' +
+'{"firstName":"Anna","lastName":"Smith" },' +
+'{"firstName":"Peter","lastName":"Jones" }]}';
+
+const obj = JSON.parse(text);
+document.getElementById("demo64").innerHTML =
+obj.employees[1].firstName + " " + obj.employees[1].lastName;
+</script>
+
+
+
+
+
+<p>This example links to "myScript2.js".</p>
+<p>(myFunction is stored in "myScript2.js")</p>
+<script src="myScript2.js">
+
+
+
+</script>
+
+
+
+</body>
+</html>
